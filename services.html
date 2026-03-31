@@ -1,66 +1,105 @@
-<!-- ========== services.html ========== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Services – Advent Homes</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Our Services | SouthGrid Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Same base CSS as about.html */
+    :root {
+      --primary-dark: #1a1a1a;
+      --primary-charcoal: #2c2c2c;
+      --accent-gold: #c5a059;
+      --accent-gold-hover: #b08d4b;
+      --accent-gold-light: #dbb87c;
+      --text-light: #f4f4f4;
+      --text-gray: #a0a0a0;
+      --white: #ffffff;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-blur: 12px;
+      --shadow-gold: 0 15px 30px rgba(197, 160, 89, 0.4);
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      --gradient-gold: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-light) 100%);
+      --container-max: 1280px;
+      --border-radius: 4px;
+      --border-radius-lg: 8px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Manrope', sans-serif; background-color: var(--primary-dark); color: var(--text-light); line-height:1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: var(--container-max); margin: 0 auto; padding: 0 1.5rem; width:100%; }
+    .navbar { position: sticky; top:0; z-index:1000; backdrop-filter: blur(var(--glass-blur)); background: rgba(26,26,26,0.85); border-bottom:1px solid var(--glass-border); padding:1rem 2rem; }
+    .nav-container { max-width: var(--container-max); margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; }
+    .logo { font-family: 'Playfair Display', serif; font-size:1.8rem; font-weight:800; background: var(--gradient-gold); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .nav-links { display:flex; gap:2rem; list-style:none; }
+    .nav-links a { font-weight:600; font-size:0.95rem; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-gold); }
+    .menu-btn { display:none; font-size:1.5rem; cursor:pointer; color:var(--white); }
+    .btn { display:inline-flex; align-items:center; justify-content:center; padding:1rem 2.5rem; background: var(--gradient-gold); color:var(--white); font-weight:600; text-transform:uppercase; letter-spacing:1.5px; border:none; cursor:pointer; transition:var(--transition); font-size:0.9rem; border-radius:var(--border-radius); position:relative; overflow:hidden; gap:0.5rem; }
+    .btn::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); transition:left 0.6s; z-index:-1; }
+    .btn:hover { transform:translateY(-3px); box-shadow:var(--shadow-gold); }
+    .btn:hover::before { left:100%; }
+    .section-title { margin:2rem 0 1rem; position:relative; display:inline-block; font-family:'Playfair Display', serif; font-size:clamp(2rem,5vw,3rem); }
+    .section-title:after { content:''; display:block; width:70px; height:3px; background:var(--accent-gold); margin-top:0.5rem; }
+    .services-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:2rem; margin:2rem 0; }
+    .service-card { background: var(--glass-bg); backdrop-filter:blur(var(--glass-blur)); border-radius:var(--border-radius-lg); padding:2rem; border:1px solid var(--glass-border); transition:var(--transition); }
+    .service-card i { font-size:2.5rem; color:var(--accent-gold); margin-bottom:1rem; }
+    .service-card:hover { transform:translateY(-8px); border-color:var(--accent-gold); }
+    .cta-box { text-align:center; margin:3rem 0; padding:2rem; background:var(--glass-bg); border-radius:var(--border-radius-lg); }
+    footer { background: var(--primary-charcoal); border-top:1px solid var(--glass-border); padding:2rem; text-align:center; margin-top:3rem; }
+    .whatsapp-float { position:fixed; bottom:2rem; right:2rem; background:#25D366; width:55px; height:55px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem; color:white; z-index:99; }
+    @media (max-width:900px) { .nav-links { display:none; flex-direction:column; width:100%; background:var(--primary-charcoal); padding:1rem; margin-top:1rem; } .nav-links.show { display:flex; } .menu-btn { display:block; } }
+  </style>
 </head>
 <body>
-  <nav class="navbar" id="navbar">...</nav>
-  <section class="page-header">
-    <div class="container">
-      <h1>Our Services</h1>
-      <p class="subhead">Comprehensive luxury pool craftsmanship</p>
-    </div>
-  </section>
+<div class="navbar">
+  <div class="nav-container">
+    <div class="logo">SOUTHGRID STUDIO</div>
+    <div class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</div>
 
-  <section class="services-grid-section fade-up">
-    <div class="container">
-      <div class="service-grid">
-        <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1551893478-d726eaf0442c?q=80&w=1974&auto=format&fit=crop" alt="design">
-          <h3>Custom Pool Design</h3>
-          <p>From $150k – bespoke designs that reflect your architectural language.</p>
-        </div>
-        <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?q=80&w=2070&auto=format&fit=crop" alt="construction">
-          <h3>Precision Construction</h3>
-          <p>In‑house teams, premium materials, and obsessive attention.</p>
-        </div>
-        <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=2070&auto=format&fit=crop" alt="outdoor">
-          <h3>Outdoor Living Suites</h3>
-          <p>Kitchens, fire features, covered terraces – seamless transitions.</p>
-        </div>
-        <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4?q=80&w=2070&auto=format&fit=crop" alt="renovation">
-          <h3>Renovation & Water Features</h3>
-          <p>Transform existing pools with modern technology and aesthetics.</p>
-        </div>
-        <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2070&auto=format&fit=crop" alt="lighting">
-          <h3>Smart Lighting & Automation</h3>
-          <p>Set the mood with intuitive, app‑controlled ambient lighting.</p>
-        </div>
-        <div class="service-card">
-          <img src="https://images.unsplash.com/photo-1580261450046-d0a30080dc9e?q=80&w=1974&auto=format&fit=crop" alt="spa">
-          <h3>Spa & Wellness Zones</h3>
-          <p>Integrated spas, swim jets, and hydrotherapy for daily renewal.</p>
-        </div>
-      </div>
+<main>
+  <div class="container">
+    <h1 class="section-title">Our Premium Services</h1>
+    <div class="services-grid">
+      <div class="service-card"><i class="fas fa-laptop-code"></i><h3>Website Design & Development</h3><p>Custom websites that reflect premium brand identity, fully responsive and conversion-optimized.</p></div>
+      <div class="service-card"><i class="fas fa-mobile-alt"></i><h3>Responsive Design</h3><p>Flawless experience on all devices — mobile, tablet, desktop, ultra-wide.</p></div>
+      <div class="service-card"><i class="fas fa-sync-alt"></i><h3>Website Redesign</h3><p>Modernize outdated websites, increase speed, and boost user engagement.</p></div>
+      <div class="service-card"><i class="fas fa-search"></i><h3>SEO Optimization</h3><p>Rank #1 for "Web design Juba South Sudan" and drive organic leads.</p></div>
+      <div class="service-card"><i class="fas fa-ad"></i><h3>Paid Ads (Google / Social)</h3><p>Targeted campaigns that bring construction leads directly to your business.</p></div>
+      <div class="service-card"><i class="fas fa-wrench"></i><h3>Website Maintenance</h3><p>Ongoing updates, security, and performance monitoring for peace of mind.</p></div>
+      <div class="service-card"><i class="fas fa-store"></i><h3>E-Commerce Solutions</h3><p>Online stores with secure payments, inventory management, and seamless checkout.</p></div>
+      <div class="service-card"><i class="fas fa-chart-pie"></i><h3>Analytics & Reporting</h3><p>Data-driven insights to track performance and maximize ROI.</p></div>
     </div>
-  </section>
 
-  <section class="cta-full small">
-    <div class="container">
-      <h2>Ready to discuss your vision?</h2>
-      <a href="contact.html" class="btn-large">Contact us</a>
+    <div class="cta-box">
+      <h3>Ready to transform your digital presence?</h3>
+      <a href="tel:+211921569043" class="btn" style="margin-top:1rem"><i class="fas fa-phone-alt"></i> Call Us Now</a>
     </div>
-  </section>
+  </div>
+</main>
 
-  <footer class="footer">...</footer>
-  <script src="script.js"></script>
+<footer>
+  <p>© 2026 SouthGrid Studio — Premium Web Agency, Jebel Suk, Juba, South Sudan</p>
+</footer>
+<a href="https://wa.me/211921569043" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<script>
+  document.getElementById('menuBtn')?.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('show');
+  });
+</script>
 </body>
 </html>
