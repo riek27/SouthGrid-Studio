@@ -1,65 +1,122 @@
-<!-- ========== about.html ========== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About – Advent Homes</title>
-  <link rel="stylesheet" href="style.css">
+  <title>About Us | SouthGrid Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Copy all CSS from index.html here (or link external, but for simplicity embed same) */
+    /* For brevity, I'll include the same CSS as in index.html; in actual implementation, you can reuse. */
+    /* I'll use the exact same styles from index.html for consistency. */
+    :root {
+      --primary-dark: #1a1a1a;
+      --primary-charcoal: #2c2c2c;
+      --accent-gold: #c5a059;
+      --accent-gold-hover: #b08d4b;
+      --accent-gold-light: #dbb87c;
+      --text-light: #f4f4f4;
+      --text-gray: #a0a0a0;
+      --white: #ffffff;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-blur: 12px;
+      --shadow-gold: 0 15px 30px rgba(197, 160, 89, 0.4);
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      --gradient-gold: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-light) 100%);
+      --gradient-dark: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
+      --container-max: 1280px;
+      --border-radius: 4px;
+      --border-radius-lg: 8px;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Manrope', sans-serif; background-color: var(--primary-dark); color: var(--text-light); line-height:1.6; }
+    a { text-decoration: none; color: inherit; }
+    .container { max-width: var(--container-max); margin: 0 auto; padding: 0 1.5rem; width:100%; }
+    .navbar { position: sticky; top:0; z-index:1000; backdrop-filter: blur(var(--glass-blur)); background: rgba(26,26,26,0.85); border-bottom:1px solid var(--glass-border); padding:1rem 2rem; }
+    .nav-container { max-width: var(--container-max); margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; }
+    .logo { font-family: 'Playfair Display', serif; font-size:1.8rem; font-weight:800; background: var(--gradient-gold); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .nav-links { display:flex; gap:2rem; list-style:none; }
+    .nav-links a { font-weight:600; font-size:0.95rem; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-gold); }
+    .menu-btn { display:none; font-size:1.5rem; cursor:pointer; color:var(--white); }
+    .btn { display:inline-flex; align-items:center; justify-content:center; padding:1rem 2.5rem; background: var(--gradient-gold); color:var(--white); font-weight:600; text-transform:uppercase; letter-spacing:1.5px; border:none; cursor:pointer; transition:var(--transition); font-size:0.9rem; border-radius:var(--border-radius); position:relative; overflow:hidden; gap:0.5rem; }
+    .btn::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); transition:left 0.6s; z-index:-1; }
+    .btn:hover { transform:translateY(-3px); box-shadow:var(--shadow-gold); }
+    .btn:hover::before { left:100%; }
+    .section-title { margin:2rem 0 1rem; position:relative; display:inline-block; font-family:'Playfair Display', serif; font-size:clamp(2rem,5vw,3rem); }
+    .section-title:after { content:''; display:block; width:70px; height:3px; background:var(--accent-gold); margin-top:0.5rem; }
+    .mission-vision { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:2rem; margin:2rem 0; }
+    .mv-card { background: var(--glass-bg); backdrop-filter:blur(var(--glass-blur)); border-radius:var(--border-radius-lg); padding:2rem; border:1px solid var(--glass-border); text-align:center; }
+    .mv-card img { width:100%; max-height:200px; object-fit:cover; border-radius:var(--border-radius); margin-bottom:1rem; }
+    .founder-section { background: var(--glass-bg); backdrop-filter:blur(var(--glass-blur)); border-radius:var(--border-radius-lg); padding:2rem; margin:2rem 0; display:flex; flex-wrap:wrap; gap:2rem; align-items:center; }
+    .founder-img { width:180px; height:180px; border-radius:50%; object-fit:cover; border:3px solid var(--accent-gold); }
+    .cta-box { text-align:center; margin:3rem 0; padding:2rem; background:var(--glass-bg); border-radius:var(--border-radius-lg); }
+    footer { background: var(--primary-charcoal); border-top:1px solid var(--glass-border); padding:2rem; text-align:center; margin-top:3rem; }
+    .whatsapp-float { position:fixed; bottom:2rem; right:2rem; background:#25D366; width:55px; height:55px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem; color:white; z-index:99; }
+    @media (max-width:900px) { .nav-links { display:none; flex-direction:column; width:100%; background:var(--primary-charcoal); padding:1rem; margin-top:1rem; } .nav-links.show { display:flex; } .menu-btn { display:block; } .founder-section { flex-direction:column; text-align:center; } }
+  </style>
 </head>
 <body>
-  <nav class="navbar" id="navbar">
-    <div class="nav-container">
-      <a href="index.html" class="logo">ADVENT HOMES</a>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="services.html">Services</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      <div class="nav-cta">
-        <a href="tel:+17135552024" class="cta-phone"><i class="fas fa-phone-alt"></i> 713.555.2024</a>
-        <a href="contact.html" class="cta-button">Get Started</a>
-      </div>
-      <div class="mobile-menu-toggle"><i class="fas fa-bars"></i></div>
-    </div>
-  </nav>
+<div class="navbar">
+  <div class="nav-container">
+    <div class="logo">SOUTHGRID STUDIO</div>
+    <div class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</div>
 
-  <section class="page-header">
-    <div class="container">
-      <h1>About Advent Homes</h1>
-      <p class="subhead">Houston roots, worldwide craftsmanship</p>
-    </div>
-  </section>
+<main>
+  <div class="container">
+    <h1 class="section-title">About SouthGrid Studio</h1>
+    <p style="font-size:1.2rem; margin-bottom:2rem">We are a premium web design & development agency based in Jebel Suk, Juba. Specialized in helping construction companies and local businesses dominate digital space.</p>
 
-  <section class="about-section fade-up">
-    <div class="container two-col">
-      <div class="about-text">
-        <span class="section-subhead">Our story</span>
-        <h2>Building liquid architecture for two decades</h2>
-        <p>Advent Homes was born from a belief that a pool is not a hole in the ground—it's architecture, emotion, and legacy. For twenty years, we've partnered with Houston's most esteemed families to shape water, stone, and light into living art.</p>
-        <p>We are a team of designers, engineers, and artisans who approach every project as a gallery piece. Your privacy, your taste, your timeline—honored.</p>
-        <a href="contact.html" class="btn-gold">Meet the team</a>
+    <div class="mission-vision">
+      <div class="mv-card">
+        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&auto=format" alt="Mission">
+        <h3>Our Mission</h3>
+        <p>To empower South Sudanese businesses with world-class websites that drive real growth, innovation, and digital leadership.</p>
       </div>
-      <div class="about-image"><img src="https://images.unsplash.com/photo-1582266255765-fa5cf1a1d501?q=80&w=2070&auto=format&fit=crop" alt="architectural pool"></div>
-    </div>
-  </section>
-
-  <section class="values-section fade-up">
-    <div class="container">
-      <span class="section-subhead">Our ethos</span>
-      <h2>Trust, transparency, timelessness</h2>
-      <div class="values-grid">
-        <div class="value-card"><i class="fas fa-water"></i><h3>Water as art</h3><p>We sculpt with the same reverence as a fine artist.</p></div>
-        <div class="value-card"><i class="fas fa-handshake"></i><h3>White‑glove service</h3><p>Every detail anticipated, every question answered.</p></div>
-        <div class="value-card"><i class="fas fa-tree"></i><h3>Harmony with nature</h3><p>Pools that belong to their landscape.</p></div>
+      <div class="mv-card">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&auto=format" alt="Vision">
+        <h3>Our Vision</h3>
+        <p>To become the most trusted digital partner in East Africa for construction, trade, and enterprise sectors.</p>
       </div>
     </div>
-  </section>
 
-  <!-- footer same as index -->
-  <footer class="footer">... (same as index) ...</footer>
-  <script src="script.js"></script>
+    <div class="founder-section">
+      <img class="founder-img" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Riek Gatluak">
+      <div>
+        <h2>Riek Gatluak — Founder & Lead Architect</h2>
+        <p>Riek Gatluak is a visionary web developer and digital strategist with over 10 years of experience crafting high-performance websites for businesses across Africa. Born and raised in Juba, Riek understood early the power of digital presence for local enterprises. After earning a degree in Computer Science and working with international agencies, he returned to South Sudan with a mission: to help construction companies, logistics firms, and local brands compete globally through exceptional web experiences.</p>
+        <p style="margin-top:1rem">Riek has led projects for major construction firms, built scalable e-commerce platforms, and trained dozens of developers. His approach combines technical excellence with a deep understanding of business goals, ensuring every website doesn't just look beautiful but also converts visitors into loyal clients. Under his leadership, SouthGrid Studio has become the go-to agency for premium web solutions in Juba.</p>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <h3>Ready to elevate your business?</h3>
+      <a href="https://wa.me/211921569043?text=Hello%20SouthGrid%20Studio%2C%20I'd%20like%20to%20work%20with%20you" target="_blank" class="btn" style="margin-top:1rem"><i class="fab fa-whatsapp"></i> Send us WhatsApp</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 SouthGrid Studio — Premium Web Agency, Jebel Suk, Juba, South Sudan</p>
+</footer>
+<a href="https://wa.me/211921569043" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<script>
+  document.getElementById('menuBtn')?.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('show');
+  });
+</script>
 </body>
 </html>
